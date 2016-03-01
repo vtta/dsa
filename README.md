@@ -12,7 +12,7 @@ This is a boiler plate for C++ projects. What you get:
 - Code coverage with Coveralls.io
 
 ### Structure
-Sources go in [src/], header files in [include/], main programs in [app/] (must be added to [CMakeLists.txt]),
+Sources go in [src/](src/), header files in [include/](include/), main programs in [app/] (must be added to [CMakeLists.txt]),
 tests go in [tests/] (compiled in unit_tests.x by default).
 
 Ignored files are Emacs backup files, executables and the build/ dir.
@@ -23,7 +23,7 @@ Build by making a build directory (i.e. build/), run CMake in that dir, and then
 
 Example:
 
-```
+``` bash
 $ mkdir build && cd build
 $ cmake .. # argument is location of CMakelists.txt
 $ make
