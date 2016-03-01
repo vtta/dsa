@@ -4,6 +4,7 @@
 class Dummy {
 	public:
 	Dummy();
+	bool doSomething();
 };
 
 #endif
