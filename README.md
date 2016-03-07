@@ -32,7 +32,17 @@ $ make
 $ ./unit_tests.x
 ```
 
+## Setup
+When starting a new project, you probably don't want the history of this repository. To start fresh, with just the files
+and no history, you simply delete the `.git/` directory and start a new one:
 
+``` bash
+$ rm -rf .git
+$ git init
+$ git commit -am "Added C++ Boiler Plate"
+```
+
+The result is a fresh Git repository with one commit adding all files from the boiler plate. 
 
 ## Services
 
