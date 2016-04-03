@@ -3,11 +3,19 @@ project(PROJECT_NAME)
  
 enable_language(C CXX)
 
-# options for debugging
-set(CMAKE_CXX_FLAGS "-std=c++0x -Wall -O0 -g3")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
-# options for optimization
-# set(CMAKE_CXX_FLAGS "-std=c++0x -Wall -O2")
+option(debug "Use debugging flag" ON)
+option(coverage "Use coverage flag" OFF)
+
+set(CMAKE_CXX_FLAGS "-std=c++0x -Wall")
+
+if (debug)
+     set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -Wall -g")
+     if (coverage)
+          set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
+     endif()
+else ()
+     set(CMAKE_C_FLAGS "-Wall -O2")
+endif()
 
 
 include_directories(
