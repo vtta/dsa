@@ -55,7 +55,7 @@ ENDIF() # NOT GCOV_PATH
 
 IF(NOT CMAKE_COMPILER_IS_GNUCXX)
 	IF(NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-		MESSAGE(FATAL_ERROR "Compiler is not GNU gcc! Aborting...")
+        MESSAGE(FATAL_ERROR "Compiler is not GNU gcc or Clang! Aborting...")
 	ENDIF()
 ENDIF() # NOT CMAKE_COMPILER_IS_GNUCXX
 
