@@ -17,6 +17,14 @@ enable_language(C CXX)
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 0)
 
+
+# Include stuff. No change needed.
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+include(ConfigSafeGuards)
+include(CodeCoverage)
+include(Colors)
+
+
 # --------------------------------------------------------------------------------
 #                          Compile flags (change as needed).
 # --------------------------------------------------------------------------------
@@ -84,6 +92,18 @@ include(CTest)
 enable_testing()
 add_test(unit_tests ${PROJECT_BINARY_DIR}/${TEST_MAIN})
 
+# --------------------------------------------------------------------------------
+#                         Code Coverage (no change needed).
+# --------------------------------------------------------------------------------
+# If unwanted files are included in the coverage reports, you can adjust the exclude
+# patterns on line 118 in cmake/CodeCoverage.cmake
+SETUP_TARGET_FOR_COVERAGE(
+                        coverage            # Name for custom target.
+                        ${TEST_MAIN}        # Name of the test driver executable that runs the tests.
+                                            # NOTE! This should always have a ZERO as exit code
+                                            # otherwise the coverage generation will not complete.
+                        coverage_out        # Name of output directory.
+                        )
 
 # --------------------------------------------------------------------------------
 #                         Documentation (no change needed).
