@@ -12,8 +12,8 @@ This is a boiler plate for C++ projects. What you get:
 - Access to [Google Tests](https://github.com/google/googletest)
 - Use of [CMake](https://cmake.org/) for much easier compiling
 - Code documentation with [Doxygen](http://www.stack.nl/~dimitri/doxygen/)
-- Continuous testing with [Travis-CI](https://travis-ci.org/)
-- Code coverage with [Coveralls.io](https://coveralls.io/)
+- Continuous testing with [Travis-CI](https://travis-ci.org/), with support for C++17.
+- Code coverage reports, including automatic upload to [Coveralls.io](https://coveralls.io/)
 
 ## Structure
 ```
@@ -55,10 +55,11 @@ Example:
 
 ``` bash
 $ mkdir build && cd build
-$ cmake .. # argument is location of CMakelists.txt
+$ cmake ..  # argument is location of CMakelists.txt
 $ make
-$ make gtest
 $ ./main.x
+$ make gtest
+$ make coverage
 ```
 
 ## .gitignore
