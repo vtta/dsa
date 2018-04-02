@@ -21,8 +21,10 @@ set(PROJECT_VERSION_MINOR 0)
 # Include stuff. No change needed.
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 include(ConfigSafeGuards)
-include(CodeCoverage)
 include(Colors)
+# If CMake aborts due to missing dependencies for code coverage 
+# (gcov, lcov, genhtml and supported compiler), comment this line.
+include(CodeCoverage)
 
 
 # --------------------------------------------------------------------------------
