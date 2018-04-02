@@ -20,31 +20,19 @@ set(PROJECT_VERSION_MINOR 0)
 # --------------------------------------------------------------------------------
 #                          Compile flags (change as needed).
 # --------------------------------------------------------------------------------
-# These options can be turned on/off from the 'make' command.
-option(debug "Use debugging flag" ON)
-option(coverage "Use coverage flag" OFF)
-
 # Set the C++ standard you wish to use (will apply to all files).
 # If you do not use any features that limits the standard required,
 # you could omitt this line.
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 # Things to always include as flags. Change as needed.
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")  
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")  
 
-# Set debug/coverage flags, or optimize, depending on options.
-if (debug)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
-    # Coverage can only be set if -g is used.
-    if (coverage)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
-    endif()
-else ()
-    # Optimize flag for production code. Change as needed.
-    set(CMAKE_CXX_FLAGS "-O2")
-endif()
+# Build-type spesific flags. Change as needed.
+SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+SET(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 
-
+message(STATUS "Building with the following extra flags: ${CMAKE_CXX_FLAGS}")
 
 # --------------------------------------------------------------------------------
 #                         Locate files (no change needed).
