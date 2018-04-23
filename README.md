@@ -82,9 +82,11 @@ and no history, you simply delete the `.git/` directory and start a new one:
 ``` bash
 $ git clone <link to this repo>
 $ cd cpp-project
-$ rm -rf .git
-$ git init
-$ git commit -am "Added C++ Boiler Plate"
+$ git remote remove origin
+$ # Revert to first commit, add and commit everthing as single commit.
+$ git reset $(git rev-list --max-parents=0 --abbrev-commit HEAD)
+$ git add --all
+$ git commit --amend
 ```
 
 The result is a fresh Git repository with one commit adding all files from the boiler plate. 
