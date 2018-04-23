@@ -81,11 +81,6 @@ MARK_AS_ADVANCED(
     CMAKE_EXE_LINKER_FLAGS_COVERAGE
     CMAKE_SHARED_LINKER_FLAGS_COVERAGE )
 
-IF ( NOT (CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "Coverage"))
-  MESSAGE( WARNING "Code coverage results with an optimized (non-Debug) build may be misleading" )
-ENDIF() # NOT CMAKE_BUILD_TYPE STREQUAL "Debug"
-
-
 # Param _targetname     The name of new the custom make target
 # Param _testrunner     The name of the target which runs the tests.
 #						MUST return ZERO always, even on errors. 
@@ -132,36 +127,22 @@ FUNCTION(SETUP_TARGET_FOR_COVERAGE _targetname _testrunner _outputname)
 
 ENDFUNCTION() # SETUP_TARGET_FOR_COVERAGE
 
-# Param _targetname     The name of new the custom make target
-# Param _testrunner     The name of the target which runs the tests
-# Param _outputname     cobertura output is generated as _outputname.xml
-# Optional fourth parameter is passed as arguments to _testrunner
-#   Pass them in list form, e.g.: "-j;2" for -j 2
-FUNCTION(SETUP_TARGET_FOR_COVERAGE_COBERTURA _targetname _testrunner _outputname)
 
-	IF(NOT PYTHON_EXECUTABLE)
-		MESSAGE(FATAL_ERROR "Python not found! Aborting...")
-	ENDIF() # NOT PYTHON_EXECUTABLE
+string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_tolower)
+if (cmake_build_type_tolower STREQUAL "coverage")
+    # If unwanted files are included in the coverage reports, you can 
+    # adjust the exclude patterns on line 114. 
+    SETUP_TARGET_FOR_COVERAGE(
+                            coverage            # Name for custom target.
+                            ${TEST_MAIN}        # Name of the test driver executable that runs the tests.
+                                                # NOTE! This should always have a ZERO as exit code
+                                                # otherwise the coverage generation will not complete.
+                            coverage_out        # Name of output directory.
+                            )
+else() 
+    add_custom_target(coverage 
+        COMMAND echo "${Red}Code coverage only available in coverage builds." 
+        COMMAND echo "${Green}Make a new build directory and rerun cmake with -DCMAKE_BUILD_TYPE=Coverage to enable this target.${ColorReset}" 
+    )
+endif()
 
-	IF(NOT GCOVR_PATH)
-		MESSAGE(FATAL_ERROR "gcovr not found! Aborting...")
-	ENDIF() # NOT GCOVR_PATH
-
-	ADD_CUSTOM_TARGET(${_targetname}
-
-		# Run tests
-		${_testrunner} ${ARGV3}
-
-		# Running gcovr
-		COMMAND ${GCOVR_PATH} -x -r ${CMAKE_SOURCE_DIR} -e '${CMAKE_SOURCE_DIR}/tests/' -e '${CMAKE_SOURCE_DIR}/build/'  -o ${_outputname}.xml
-		WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-		COMMENT "Running gcovr to produce Cobertura code coverage report."
-	)
-
-	# Show info where to find the report
-	ADD_CUSTOM_COMMAND(TARGET ${_targetname} POST_BUILD
-		COMMAND ;
-		COMMENT "Cobertura code coverage report saved in ${_outputname}.xml."
-	)
-
-ENDFUNCTION() # SETUP_TARGET_FOR_COVERAGE_COBERTURA
