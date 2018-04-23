@@ -58,8 +58,9 @@ $ mkdir build && cd build
 $ cmake ..  # argument is location of CMakelists.txt
 $ make
 $ ./main.x
-$ make gtest
-$ make coverage
+$ make gtest     # Makes and runs the tests.
+$ make coverage  # Generate a coverage report.
+$ make doc       # Generate html documentation.
 ```
 
 ## .gitignore
