@@ -3,7 +3,7 @@
 # Remove the remote (you probably want your own instead).
 git remote remove origin
 
-# Revert to first commit, add and commit everthing as single commit.
+# Revert to first commit, add and commit everything as single commit.
 git reset "$(git rev-list --max-parents=0 --abbrev-commit HEAD)"
 
 git add --all
