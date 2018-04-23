@@ -15,6 +15,8 @@ This is a boiler plate for C++ projects. What you get:
 - Code coverage reports, including automatic upload to [Coveralls.io](https://coveralls.io/)
 - Code documentation with [Doxygen](http://www.stack.nl/~dimitri/doxygen/)
 
+![Demo of usage](https://i.imgur.com/foymVfy.gif)
+
 ## Structure
 ```
 .
