@@ -77,18 +77,12 @@ If repository is activated with Coveralls, then deployment to Travis will also c
 upload this to Coveralls.io. 
 
 ## Setup
-When starting a new project, you probably don't want the history of this repository. To start fresh, with just the files
-and no history, you simply delete the `.git/` directory and start a new one:
-
+When starting a new project, you probably don't want the history of this repository. To start fresh you can use
+the [setup script](setup.sh) as follows:
 ``` bash
-$ git clone <link to this repo>
+$ git clone https://github.com/bsamseth/cpp-project  # Or use ssh-link if you like.
 $ cd cpp-project
-$ git remote remove origin
-$ # Revert to first commit, add and commit everthing as single commit.
-$ git reset $(git rev-list --max-parents=0 --abbrev-commit HEAD)
-$ git add --all
-$ git commit --amend
+$ sh setup.sh
 ```
-
 The result is a fresh Git repository with one commit adding all files from the boiler plate. 
 
