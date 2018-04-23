@@ -55,7 +55,7 @@ Example:
 
 ``` bash
 $ mkdir build && cd build
-$ cmake ..  # argument is location of CMakelists.txt
+$ cmake .. -DCMAKE_BUILD_TYPE=[Debug | Coverage | Release]
 $ make
 $ ./main.x
 $ make gtest     # Makes and runs the tests.
