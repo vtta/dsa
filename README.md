@@ -85,7 +85,7 @@ the [setup script](setup.sh) as follows:
 ``` bash
 $ git clone https://github.com/bsamseth/cpp-project  # Or use ssh-link if you like.
 $ cd cpp-project
-$ sh setup.sh "Your Name <your@email.com>"
+$ sh setup.sh
 ```
 The result is a fresh Git repository with one commit adding all files from the boiler plate. 
 
