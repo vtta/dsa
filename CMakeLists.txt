@@ -5,7 +5,7 @@
 #
 # For many purposes, you may not need to change anything about this file.
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1.3)
 
 # Set project name here.
 project(CPP_BOILERPLATE)
@@ -30,7 +30,7 @@ include(Colors)
 # Set the C++ standard you wish to use (will apply to all files).
 # If you do not use any features that limits the standard required,
 # you could omit this line.
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+set(CMAKE_CXX_STANDARD 14)
 
 # Things to always include as flags. Change as needed.
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")  
