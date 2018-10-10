@@ -18,3 +18,9 @@ if [[ "$1" ]]; then
 else
 	git commit --amend --author="$name <$email>" 
 fi
+
+# Initialize submodules: This is done by CMake, but there are ways to muck it
+# up if you does things in the wrong order. So just to be sure, we do it now.
+git submodule init
+
+git submodule update
