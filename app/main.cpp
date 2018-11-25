@@ -13,6 +13,10 @@ int main() {
             << PROJECT_VERSION_MAJOR
             << "."
             << PROJECT_VERSION_MINOR
+            << "."
+            << PROJECT_VERSION_PATCH
+            << "."
+            << PROJECT_VERSION_TWEAK
             << std::endl;
   std::system("cat ../LICENCE");
 

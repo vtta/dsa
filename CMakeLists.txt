@@ -7,15 +7,10 @@
 
 cmake_minimum_required(VERSION 3.1.3)
 
-# Set project name here.
-project(CPP_BOILERPLATE)
-enable_language(C CXX)
-
-# Set version number (change as needed). These definitions are available
-# by including "exampleConfig.h" in the source. 
-# See exampleConfig.h.in for some more details.
-set(PROJECT_VERSION_MAJOR 1)
-set(PROJECT_VERSION_MINOR 0)
+# Set project name, version and laguages here. (change as needed)
+# Version numbers are available by including "exampleConfig.h" in 
+# the source. See exampleConfig.h.in for some more details.
+project(CPP_BOILERPLATE VERSION 1.2.3.4 LANGUAGES C CXX)
 
 
 # Include stuff. No change needed.
