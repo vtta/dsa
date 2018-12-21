@@ -79,7 +79,7 @@ public:
         return res;
     }
 
-    bool empty() const { return front() == tail(); }
+    bool empty() const { return head()->next == tail(); }
     int  size() const { return _size; }
 
     node_ptr head() const { return header; }
