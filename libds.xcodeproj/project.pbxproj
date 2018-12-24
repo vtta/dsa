@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		3B65F21B21CA2E6B0045009A /* CompleteHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B65F21921CA2E6B0045009A /* CompleteHeap.cpp */; };
 		3B6A181E21AE80F300DD8B06 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B6A181D21AE80F300DD8B06 /* main.cpp */; };
+		3B7F3D7F21CFAE6D00F04C2F /* DictionaryInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B7F3D7D21CFAE6D00F04C2F /* DictionaryInterface.cpp */; };
 		3B90B4EC21AE91F000779EB7 /* Vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B90B4EA21AE91F000779EB7 /* Vector.cpp */; };
 		3B90B4F221AE920B00779EB7 /* Stack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B90B4F021AE920B00779EB7 /* Stack.cpp */; };
 		3B90B4F521AE921200779EB7 /* Queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B90B4F321AE921200779EB7 /* Queue.cpp */; };
 		3B90B50121AE924A00779EB7 /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B90B4FF21AE924A00779EB7 /* Vertex.cpp */; };
 		3B90B50421AE925500779EB7 /* Edge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B90B50221AE925500779EB7 /* Edge.cpp */; };
-		3B90B50721AE926700779EB7 /* Graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B90B50521AE926700779EB7 /* Graph.cpp */; };
+		3B90B50721AE926700779EB7 /* GraphInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B90B50521AE926700779EB7 /* GraphInterface.cpp */; };
 		3B90B50A21AE928F00779EB7 /* AdjacencyMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B90B50821AE928F00779EB7 /* AdjacencyMatrix.cpp */; };
 		3B90B50D21AE92AC00779EB7 /* SingleList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B90B50B21AE92AC00779EB7 /* SingleList.cpp */; };
 		3B90B51021AE92F300779EB7 /* BinaryNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B90B50E21AE92F300779EB7 /* BinaryNode.cpp */; };
@@ -22,11 +23,12 @@
 		3B90B51621AE930900779EB7 /* BinarySearchTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B90B51421AE930900779EB7 /* BinarySearchTree.cpp */; };
 		3B90B51C21AE949200779EB7 /* RedBlackTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B90B51A21AE949200779EB7 /* RedBlackTree.cpp */; };
 		3B90B51F21AE951C00779EB7 /* HashTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B90B51D21AE951C00779EB7 /* HashTable.cpp */; };
-		3B90B52221AE952800779EB7 /* PriorityQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B90B52021AE952800779EB7 /* PriorityQueue.cpp */; };
+		3B90B52221AE952800779EB7 /* PriorityQueueInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B90B52021AE952800779EB7 /* PriorityQueueInterface.cpp */; };
 		3B90B52521AE95D000779EB7 /* BTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B90B52321AE95D000779EB7 /* BTree.cpp */; };
 		3B9810E021AFC3C000B70BBF /* DoubleListNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B9810DE21AFC3C000B70BBF /* DoubleListNode.cpp */; };
 		3B9810E321AFC73D00B70BBF /* DoubleList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B9810E121AFC73D00B70BBF /* DoubleList.cpp */; };
 		3BE2C19C21AEEA4C00EE7BED /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2C19A21AEEA4C00EE7BED /* Utils.cpp */; };
+		3BEE9DF421D0B12400C9B8D7 /* BitSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BEE9DF221D0B12400C9B8D7 /* BitSet.cpp */; };
 		3BEF50D221C7F39A00056923 /* Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BEF50D021C7F39A00056923 /* Test.cpp */; };
 		3BFDC68921C0E14D0015866E /* AdjacencyList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BFDC68721C0E14D0015866E /* AdjacencyList.cpp */; };
 		3BFDC68C21C0E9440015866E /* Pair.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BFDC68A21C0E9440015866E /* Pair.cpp */; };
@@ -49,6 +51,8 @@
 		3B65F21A21CA2E6B0045009A /* CompleteHeap.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CompleteHeap.hpp; sourceTree = "<group>"; };
 		3B6A181A21AE80F300DD8B06 /* libds */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = libds; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B6A181D21AE80F300DD8B06 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3B7F3D7D21CFAE6D00F04C2F /* DictionaryInterface.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DictionaryInterface.cpp; sourceTree = "<group>"; };
+		3B7F3D7E21CFAE6D00F04C2F /* DictionaryInterface.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DictionaryInterface.hpp; sourceTree = "<group>"; };
 		3B90B4EA21AE91F000779EB7 /* Vector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Vector.cpp; sourceTree = "<group>"; };
 		3B90B4EB21AE91F000779EB7 /* Vector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vector.hpp; sourceTree = "<group>"; };
 		3B90B4F021AE920B00779EB7 /* Stack.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Stack.cpp; sourceTree = "<group>"; };
@@ -59,8 +63,8 @@
 		3B90B50021AE924A00779EB7 /* Vertex.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vertex.hpp; sourceTree = "<group>"; };
 		3B90B50221AE925500779EB7 /* Edge.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Edge.cpp; sourceTree = "<group>"; };
 		3B90B50321AE925500779EB7 /* Edge.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Edge.hpp; sourceTree = "<group>"; };
-		3B90B50521AE926700779EB7 /* Graph.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Graph.cpp; sourceTree = "<group>"; };
-		3B90B50621AE926700779EB7 /* Graph.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Graph.hpp; sourceTree = "<group>"; };
+		3B90B50521AE926700779EB7 /* GraphInterface.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GraphInterface.cpp; sourceTree = "<group>"; };
+		3B90B50621AE926700779EB7 /* GraphInterface.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GraphInterface.hpp; sourceTree = "<group>"; };
 		3B90B50821AE928F00779EB7 /* AdjacencyMatrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AdjacencyMatrix.cpp; sourceTree = "<group>"; };
 		3B90B50921AE928F00779EB7 /* AdjacencyMatrix.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AdjacencyMatrix.hpp; sourceTree = "<group>"; };
 		3B90B50B21AE92AC00779EB7 /* SingleList.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SingleList.cpp; sourceTree = "<group>"; };
@@ -75,8 +79,8 @@
 		3B90B51B21AE949200779EB7 /* RedBlackTree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RedBlackTree.hpp; sourceTree = "<group>"; };
 		3B90B51D21AE951C00779EB7 /* HashTable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HashTable.cpp; sourceTree = "<group>"; };
 		3B90B51E21AE951C00779EB7 /* HashTable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HashTable.hpp; sourceTree = "<group>"; };
-		3B90B52021AE952800779EB7 /* PriorityQueue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PriorityQueue.cpp; sourceTree = "<group>"; };
-		3B90B52121AE952800779EB7 /* PriorityQueue.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PriorityQueue.hpp; sourceTree = "<group>"; };
+		3B90B52021AE952800779EB7 /* PriorityQueueInterface.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PriorityQueueInterface.cpp; sourceTree = "<group>"; };
+		3B90B52121AE952800779EB7 /* PriorityQueueInterface.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PriorityQueueInterface.hpp; sourceTree = "<group>"; };
 		3B90B52321AE95D000779EB7 /* BTree.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BTree.cpp; sourceTree = "<group>"; };
 		3B90B52421AE95D000779EB7 /* BTree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BTree.hpp; sourceTree = "<group>"; };
 		3B9810DE21AFC3C000B70BBF /* DoubleListNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DoubleListNode.cpp; sourceTree = "<group>"; };
@@ -85,6 +89,8 @@
 		3B9810E221AFC73D00B70BBF /* DoubleList.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DoubleList.hpp; sourceTree = "<group>"; };
 		3BE2C19A21AEEA4C00EE7BED /* Utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		3BE2C19B21AEEA4C00EE7BED /* Utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
+		3BEE9DF221D0B12400C9B8D7 /* BitSet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BitSet.cpp; sourceTree = "<group>"; };
+		3BEE9DF321D0B12400C9B8D7 /* BitSet.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BitSet.hpp; sourceTree = "<group>"; };
 		3BEF50D021C7F39A00056923 /* Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Test.cpp; sourceTree = "<group>"; };
 		3BEF50D121C7F39A00056923 /* Test.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Test.hpp; sourceTree = "<group>"; };
 		3BFDC68721C0E14D0015866E /* AdjacencyList.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AdjacencyList.cpp; sourceTree = "<group>"; };
@@ -135,6 +141,8 @@
 		3B6A182421AE812500DD8B06 /* linear */ = {
 			isa = PBXGroup;
 			children = (
+				3BEE9DF221D0B12400C9B8D7 /* BitSet.cpp */,
+				3BEE9DF321D0B12400C9B8D7 /* BitSet.hpp */,
 				3B9810E121AFC73D00B70BBF /* DoubleList.cpp */,
 				3B9810E221AFC73D00B70BBF /* DoubleList.hpp */,
 				3B9810DE21AFC3C000B70BBF /* DoubleListNode.cpp */,
@@ -179,8 +187,8 @@
 				3B90B50921AE928F00779EB7 /* AdjacencyMatrix.hpp */,
 				3B90B50221AE925500779EB7 /* Edge.cpp */,
 				3B90B50321AE925500779EB7 /* Edge.hpp */,
-				3B90B50521AE926700779EB7 /* Graph.cpp */,
-				3B90B50621AE926700779EB7 /* Graph.hpp */,
+				3B90B50521AE926700779EB7 /* GraphInterface.cpp */,
+				3B90B50621AE926700779EB7 /* GraphInterface.hpp */,
 				3B90B4FF21AE924A00779EB7 /* Vertex.cpp */,
 				3B90B50021AE924A00779EB7 /* Vertex.hpp */,
 			);
@@ -190,12 +198,14 @@
 		3B6A182721AE856B00DD8B06 /* others */ = {
 			isa = PBXGroup;
 			children = (
+				3B7F3D7D21CFAE6D00F04C2F /* DictionaryInterface.cpp */,
+				3B7F3D7E21CFAE6D00F04C2F /* DictionaryInterface.hpp */,
 				3B90B51D21AE951C00779EB7 /* HashTable.cpp */,
 				3B90B51E21AE951C00779EB7 /* HashTable.hpp */,
 				3BFDC68A21C0E9440015866E /* Pair.cpp */,
 				3BFDC68B21C0E9440015866E /* Pair.hpp */,
-				3B90B52021AE952800779EB7 /* PriorityQueue.cpp */,
-				3B90B52121AE952800779EB7 /* PriorityQueue.hpp */,
+				3B90B52021AE952800779EB7 /* PriorityQueueInterface.cpp */,
+				3B90B52121AE952800779EB7 /* PriorityQueueInterface.hpp */,
 				3BEF50D021C7F39A00056923 /* Test.cpp */,
 				3BEF50D121C7F39A00056923 /* Test.hpp */,
 				3BE2C19A21AEEA4C00EE7BED /* Utils.cpp */,
@@ -262,16 +272,18 @@
 			files = (
 				3B9810E021AFC3C000B70BBF /* DoubleListNode.cpp in Sources */,
 				3B90B51021AE92F300779EB7 /* BinaryNode.cpp in Sources */,
-				3B90B50721AE926700779EB7 /* Graph.cpp in Sources */,
+				3B90B50721AE926700779EB7 /* GraphInterface.cpp in Sources */,
 				3B90B50D21AE92AC00779EB7 /* SingleList.cpp in Sources */,
 				3B90B4F221AE920B00779EB7 /* Stack.cpp in Sources */,
 				3B90B50A21AE928F00779EB7 /* AdjacencyMatrix.cpp in Sources */,
 				3B9810E321AFC73D00B70BBF /* DoubleList.cpp in Sources */,
+				3B7F3D7F21CFAE6D00F04C2F /* DictionaryInterface.cpp in Sources */,
 				3BEF50D221C7F39A00056923 /* Test.cpp in Sources */,
 				3B90B50121AE924A00779EB7 /* Vertex.cpp in Sources */,
 				3B90B50421AE925500779EB7 /* Edge.cpp in Sources */,
+				3BEE9DF421D0B12400C9B8D7 /* BitSet.cpp in Sources */,
 				3B90B4EC21AE91F000779EB7 /* Vector.cpp in Sources */,
-				3B90B52221AE952800779EB7 /* PriorityQueue.cpp in Sources */,
+				3B90B52221AE952800779EB7 /* PriorityQueueInterface.cpp in Sources */,
 				3BFDC68921C0E14D0015866E /* AdjacencyList.cpp in Sources */,
 				3BFDC68C21C0E9440015866E /* Pair.cpp in Sources */,
 				3B90B51621AE930900779EB7 /* BinarySearchTree.cpp in Sources */,
@@ -405,6 +417,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
+				COMPILER_INDEX_STORE_ENABLE = YES;
 				DEVELOPMENT_TEAM = 7CNZHFNM4B;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -416,6 +429,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
+				COMPILER_INDEX_STORE_ENABLE = YES;
 				DEVELOPMENT_TEAM = 7CNZHFNM4B;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
