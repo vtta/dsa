@@ -61,8 +61,8 @@ protected:
             x = q.top();
             q.pop();
             visit(x->data);
-            if (x->hasLChild()) q.push(x->lChild);
-            if (x->hasRChild()) q.push(x->rChild);
+            if (hasLChild(x)) q.push(x->lChild);
+            if (hasRChild(x)) q.push(x->rChild);
         }
     }
     static void release(pointer x) { delete x; }
@@ -102,11 +102,11 @@ public:
     pointer succ() {
         pointer s = this;
         if (hasRChild()) {
-            s                        = rChild;
-            while (s->hasLChild()) s = s->lChild;
+            s                      = rChild;
+            while (hasLChild(s)) s = s->lChild;
         } else {
-            while (s->isRChild()) s = s->parent;
-            s                       = s->parent;
+            while (isRChild(s)) s = s->parent;
+            s                     = s->parent;
         }
         return s;
     }
@@ -136,21 +136,37 @@ public:
     bool hasSibling() const { return hasParent() && parent->hasBothChild(); }
     bool isLeaf() const { return !hasChild(); }
 
-    int        stature() { return stature(this); }
-    static int stature(pointer p) { return p ? p->height : -1; }
-
-    pointer sibling() { return sibling(this); }
-    pointer sibling(pointer x) {
-        return hasParent(x) && hasBothChild(x->parent) && isLChild(x)
-                   ? x->parent->rChild
-                   : x->parent->lChild;
+    static bool hasParent(pointer p) { return p->parent; }
+    static bool isRoot(pointer p) { return !hasParent(p); }
+    static bool isLChild(pointer p) {
+        return p->parent && p->parent->lChild == p;
     }
-    pointer uncle() { return uncle(this); }
-    pointer uncle(pointer x) {
-        return hasParent(x) && hasParent(x->parent) &&
-                       hasBothChild(x->parent->parent) && isLChild(x->parent)
-                   ? x->parent->parent->rChild
-                   : x->parent->parent->lChild;
+    static bool isRChild(pointer p) {
+        return p->parent && p->parent->rChild == p;
+    }
+    static bool hasChild(pointer p) { return hasLChild(p) || hasRChild(p); }
+    static bool hasLChild(pointer p) { return p->lChild; }
+    static bool hasRChild(pointer p) { return p->rChild; }
+    static bool hasBothChild(pointer p) { return hasLChild(p) && hasRChild(p); }
+    static bool hasSibling(pointer p) {
+        return hasParent(p) && hasBothChild(p->parent);
+    }
+    static bool isLeaf(pointer p) { return !hasChild(p); }
+
+    static int stature(pointer p) { return p ? p->height : -1; }
+    static pointer sibling(pointer x) {
+        if (hasParent(x) && hasBothChild(x->parent)) {
+            return isLChild(x) ? x->parent->rChild : x->parent->lChild;
+        }
+        return nullptr;
+    }
+    static pointer uncle(pointer x) {
+        if (hasParent(x) && hasBothChild(x->parent) &&
+            hasBothChild(x->parent->parent)) {
+            return isLChild(x->parent) ? x->parent->parent->rChild
+                                       : x->parent->parent->lChild;
+        }
+        return nullptr;
     }
 
     std::string toString(std::string prefix, std::string childPrefix) const {
@@ -168,6 +184,25 @@ public:
         } else if (hasRChild()) {
             lastChild =
                 rChild->toString(childPrefix + "└── ", childPrefix + "    ");
+        }
+        return firstLine + firstChild + lastChild;
+    }
+    std::string toStringRB(std::string prefix, std::string childPrefix) const {
+        std::string firstLine = prefix + std::to_string(data) + " " +
+                                (color == RB_RED ? "R" : "B") + "\n";
+        std::string firstChild = "";
+        std::string lastChild  = "";
+        if (hasBothChild()) {
+            firstChild =
+                lChild->toStringRB(childPrefix + "├── ", childPrefix + "│   ");
+            lastChild =
+                rChild->toStringRB(childPrefix + "└── ", childPrefix + "    ");
+        } else if (hasLChild()) {
+            lastChild =
+                lChild->toStringRB(childPrefix + "└── ", childPrefix + "    ");
+        } else if (hasRChild()) {
+            lastChild =
+                rChild->toStringRB(childPrefix + "└── ", childPrefix + "    ");
         }
         return firstLine + firstChild + lastChild;
     }
