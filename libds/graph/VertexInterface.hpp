@@ -1,5 +1,5 @@
 //
-//  Vertex.hpp
+//  VertexInterface.hpp
 //  libds
 //
 //  Created by v tta on 11/28/18.
@@ -18,9 +18,9 @@ namespace libds {
 typedef enum { UNDISCOVERED, DISCOVERED, VISITED } vertex_status;
 
 template <typename vertex_data_type>
-class Vertex {
+class VertexInterface {
 public:
-    Vertex(vertex_data_type const& d = (vertex_data_type)0)
+    VertexInterface(vertex_data_type const& d = (vertex_data_type)0)
         : data(d),
           in_degree(0),
           out_degree(0),
@@ -41,4 +41,4 @@ private:
 
 // end of namespace libds
 }
-#endif /* Vertex_hpp */
+#endif /* VertexInterface_hpp */

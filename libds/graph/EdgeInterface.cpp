@@ -1,5 +1,5 @@
 //
-//  Edge.cpp
+//  EdgeInterface.cpp
 //  libds
 //
 //  Created by v tta on 11/28/18.
@@ -7,3 +7,8 @@
 //
 
 #include "Edge.hpp"
+namespace libds {
+// beginning of namespace libds
+
+// end of namespace libds
+}
