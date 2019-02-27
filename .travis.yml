@@ -3,6 +3,8 @@ dist: xenial
 notifications:
   email: false
 
+# Define builds on mulitple OS/compiler combinations. 
+# Feel free to add/remove entries from this list.
 matrix:
   include:
     - os: linux
@@ -14,9 +16,20 @@ matrix:
             - lcov
             - g++-7
       env:
-        - CXX_COMPILER="g++-7"
+        - MATRIX_EVAL="CXX_COMPILER=g++-7"
+
+    - os: osx
+      osx_image: xcode10.1
+      addons:
+        homebrew:
+          packages:
+          - lcov
+      env:
+        - MATRIX_EVAL="CXX_COMPILER=clang++"
+    
 
 before_install:
+  - eval "${MATRIX_EVAL}"
   - PARENTDIR=$(pwd)
   - mkdir $PARENTDIR/build
 
