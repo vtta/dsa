@@ -42,15 +42,15 @@ This is a boiler plate for C++ projects. What you get:
 Sources go in [src/](src/), header files in [include/](include/), main programs in [app/](app), and
 tests go in [tests/](tests/) (compiled to `unit_tests.x` by default). 
 
-If you add a new executable, say `app/hello.cpp`, you only need to add the following three lines to [CMakeLists.txt](CMakeLists.txt): 
+If you add a new executable, say `app/hello.cpp`, you only need to add the following two lines to [CMakeLists.txt](CMakeLists.txt): 
 
 ``` cmake
-add_executable(hello.x app/hello.cpp)   # Name of exec. and location of file.
-add_dependencies(hello.x engine)        # engine is the library built from src/*.cpp
-target_link_libraries(hello.x engine)   # Link the executable to the 'engine'.
+add_executable(main.x app/main.cpp)   # Name of exec. and location of file.
+target_link_libraries(main.x PRIVATE engine)  # Link the executable to `engine` (if it uses it).
+                                              # `engine` is the default name of the library built from src/*.cpp
 ```
 
-You can find the example that builds the example in [app/main.cpp](app/main.cpp) under the `Build` section in [CMakeLists.txt](CMakeLists.txt). 
+You can find the example source code that builds the `main.x` executable in [app/main.cpp](app/main.cpp) under the `Build` section in [CMakeLists.txt](CMakeLists.txt). 
 If the executable you made does not use the library in [src/](src), then only the first line is needed.
 
 
