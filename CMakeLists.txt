@@ -5,7 +5,7 @@
 #
 # For many purposes, you may not need to change anything about this file.
 
-cmake_minimum_required(VERSION 3.1.3)
+cmake_minimum_required(VERSION 3.8.2)
 
 # Set project name, version and laguages here. (change as needed)
 # Version numbers are available by including "exampleConfig.h" in 
@@ -13,138 +13,69 @@ cmake_minimum_required(VERSION 3.1.3)
 project(CPP_BOILERPLATE VERSION 1.2.3.4 LANGUAGES CXX)
 
 
+# Options: Things you can set via commandline options to cmake (e.g. -DENABLE_LTO=[ON|OFF])
+option(ENABLE_WARNINGS_SETTINGS "Allow target_set_warnings to add flags and defines.
+                                 Set this to OFF if you want to provide your own warning parameters." ON)
+option(ENABLE_LTO "Enable link time optimization" ON)
+option(ENABLE_DOCTESTS "Include tests in the library. Setting this to OFF will remove all doctest related code.
+                        Tests in tests/*.cpp will still be enabled." ON)
+
 # Include stuff. No change needed.
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 include(ConfigSafeGuards)
 include(Colors)
+include(CTest)
+include(Doctest)
+include(Documentation)
+include(LTO)
+include(Misc)
+include(Warnings)
 
+# Check for LTO support.
+find_lto(CXX)
 
 # --------------------------------------------------------------------------------
 #                         Locate files (change as needed).
 # --------------------------------------------------------------------------------
-set(SOURCES 
+set(SOURCES          # All .cpp files in src/
     src/example.cpp
 )
-set(TESTFILES
-    tests/dummy.cpp
+set(TESTFILES        # All .cpp files in tests/
     tests/main.cpp
 )
+set(LIBRARY_NAME engine)  # Default name for the library built from src/*.cpp (change if you wish)
 
 # --------------------------------------------------------------------------------
 #                            Build! (Change as needed)
 # --------------------------------------------------------------------------------
-# Compile all sources into a library. Called engine here (change if you wish).
-add_library(engine ${SOURCES})
+# Compile all sources into a library.
+add_library(${LIBRARY_NAME} OBJECT ${SOURCES})
 
-# Engine needs its header files, and users of the library must also see these (PUBLIC). (No change needed)
-target_include_directories(engine 
-    PUBLIC ${PROJECT_SOURCE_DIR}/include
-)
+# Lib needs its header files, and users of the library must also see these (PUBLIC). (No change needed)
+target_include_directories(${LIBRARY_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
-# Add an executable for the file main.cpp, here called main.x.
+# There's also (probably) doctests within the library, so we need to see this as well.
+target_link_libraries(${LIBRARY_NAME} PUBLIC doctest)
+
+# Set the compile options you want (change as needed).
+target_set_warnings(${LIBRARY_NAME} ENABLE ALL AS_ERROR ALL DISABLE Annoying)
+# target_compile_options(${LIBRARY_NAME} ... )  # For setting manually.
+
+# Add an executable for the file app/main.cpp.
 # If you add more executables, copy these lines accordingly.
-add_executable(main.x app/main.cpp)   # Name of exec. and location of file.
-target_link_libraries(main.x PRIVATE engine)  # Link the executable to `engine` (if it uses it).
+add_executable(main app/main.cpp)   # Name of exec. and location of file.
+target_link_libraries(main PRIVATE ${LIBRARY_NAME})  # Link the executable to library (if it uses it).
+target_set_warnings(main ENABLE ALL AS_ERROR ALL DISABLE Annoying) # Set warnings (if needed).
+target_enable_lto(main optimized)  # enable link-time-optimization if available for non-debug configurations
 
-# Set the compile options you want, possibly depending on compiler (change as needed).
-# Do similar for the executables if you wish to set options for them as well.
-target_compile_options(engine PRIVATE 
-                           # clang/GCC warnings
-                           $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>: 
-                           "-Wall" "-Wextra" >
-                           # MSVC warnings
-                           $<$<CXX_COMPILER_ID:MSVC>: 
-                           "/Wall" >
+# Set the properties you require, e.g. what C++ standard to use. Here applied to library and main (change as needed).
+set_target_properties(
+    ${LIBRARY_NAME} main 
+      PROPERTIES 
+        CXX_STANDARD 17 
+        CXX_STANDARD_REQUIRED YES 
+        CXX_EXTENSIONS NO
 )
 
-# Set the properties you require, e.g. what C++ standard to use (change as needed).
-set_target_properties(engine main.x PROPERTIES 
-    CXX_STANDARD 17 
-    CXX_STANDARD_REQUIRED YES 
-    CXX_EXTENSIONS NO
-)
-
-# --------------------------------------------------------------------------------
-#                         Make Tests (no change needed).
-# --------------------------------------------------------------------------------
-set(TEST_MAIN unit_tests.x)  # Default name for test executable (change if you wish).
-
-# Add a make target 'gtest', that runs the tests (and builds all dependencies).
-# The setup of Google Test is done at the very end of this file.
-add_executable(${TEST_MAIN} ${TESTFILES})
-target_link_libraries(${TEST_MAIN} googletest engine pthread)
-add_custom_target(gtest 
-    COMMAND "${PROJECT_BINARY_DIR}/${TEST_MAIN}"
-    DEPENDS ${TEST_MAIN})
-
-
-# Add a standard make target 'test' that runs the tests under CTest (only as an alt. to gtest).
-include(CTest)
-enable_testing()
-add_test(unit_tests ${PROJECT_BINARY_DIR}/${TEST_MAIN})
-
-# --------------------------------------------------------------------------------
-#                         Code Coverage (no change needed).
-# --------------------------------------------------------------------------------
-# If CMake aborts due to missing dependencies for code coverage 
-# (gcov, lcov, genhtml and supported compiler), comment this line.
-include(CodeCoverage)
-
-# --------------------------------------------------------------------------------
-#                         Documentation (no change needed).
-# --------------------------------------------------------------------------------
-# Add a make target 'doc' to generate API documentation with Doxygen.
-# You should set options to your liking in the file 'Doxyfile.in'.
-find_package(Doxygen)
-if(DOXYGEN_FOUND)
-    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
-    add_custom_target(doc 
-        ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile &> doxygen.log
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        COMMENT "${BoldMagenta}Generating API documentation with Doxygen (open ./html/index.html to view).${ColourReset}" VERBATIM
-    )
-endif(DOXYGEN_FOUND)
-
-
-# --------------------------------------------------------------------------------
-#                         Google Test (no change needed).
-# --------------------------------------------------------------------------------
-# The following makes sure that an up-to-date version of googletest is available,
-# and built so that it may be used by your tests. 
-add_custom_target(git_update
-    COMMAND git submodule init
-    COMMAND git submodule update
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-)
-add_library( googletest
-    ${PROJECT_SOURCE_DIR}/external/googletest/src/gtest-all.cc
-    ${PROJECT_SOURCE_DIR}/external/googletest/src/gtest_main.cc
-)
-target_include_directories(googletest 
-    PUBLIC ${PROJECT_SOURCE_DIR}/external/googletest/include 
-           ${PROJECT_SOURCE_DIR}/external/googletest
-)
-add_dependencies(googletest git_update)
-set_source_files_properties(
-    ${PROJECT_SOURCE_DIR}/external/googletest/src/gtest-all.cc  
-    ${PROJECT_SOURCE_DIR}/external/googletest/src/gtest_main.cc
-    PROPERTIES GENERATED 1
-)
-
-
-# --------------------------------------------------------------------------------
-#                            Misc (no change needed).
-# --------------------------------------------------------------------------------
-# Have CMake parse the config file, generating the config header, with
-# correct definitions. Here only used to make version number available to
-# the source code. Include "exampleConfig.h" (no .in suffix) in the source.
-configure_file (
-  "${PROJECT_SOURCE_DIR}/include/exampleConfig.h.in"
-  "${PROJECT_BINARY_DIR}/exampleConfig.h"
-)
-# add the binary tree to the search path for include files
-# so that we will find exampleConfig.h
-include_directories("${PROJECT_BINARY_DIR}")
-
-# Ask CMake to output a compile_commands.json file for use with things like Vim YCM.
-set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+# Set up tests (see tests/CMakeLists.txt).
+add_subdirectory(tests)

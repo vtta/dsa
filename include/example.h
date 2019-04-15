@@ -1,5 +1,4 @@
-#ifndef EXAMPLE_H
-#define EXAMPLE_H
+#pragma once
 
 /**
  * This is a dummy class to demonstrate features of the boiler plate.
@@ -8,7 +7,7 @@ class Dummy {
 	public:
 
   /**
-   * Default constructur for Dummy (does nothing).
+   * Default constructor for Dummy (does nothing).
    */
   Dummy();
   /**
@@ -18,4 +17,12 @@ class Dummy {
   bool doSomething();
 };
 
+
+#ifdef ENABLE_DOCTEST_IN_LIBRARY
+#include "doctest.h"
+TEST_CASE("we can have tests in headers if we want")
+{
+    Dummy d;
+    CHECK(d.doSomething() == true);
+}
 #endif
