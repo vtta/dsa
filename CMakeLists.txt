@@ -38,6 +38,7 @@ find_lto(CXX)
 #                         Locate files (change as needed).
 # --------------------------------------------------------------------------------
 set(SOURCES          # All .cpp files in src/
+        src/it_works.cpp
         src/tree/bstree.cpp
         src/tree/bstree.hpp
         src/tree/splay_tree.cpp
