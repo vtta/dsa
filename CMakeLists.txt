@@ -8,9 +8,9 @@
 cmake_minimum_required(VERSION 3.8.2)
 
 # Set project name, version and laguages here. (change as needed)
-# Version numbers are available by including "exampleConfig.h" in 
-# the source. See exampleConfig.h.in for some more details.
-project(CPP_BOILERPLATE VERSION 1.2.3.4 LANGUAGES CXX)
+# Version numbers are available by including "config.hpp" in
+# the source. See config.hpp.in for some more details.
+project(dsa VERSION 1.2.3.4 LANGUAGES CXX)
 
 
 # Options: Things you can set via commandline options to cmake (e.g. -DENABLE_LTO=[ON|OFF])
@@ -38,13 +38,15 @@ find_lto(CXX)
 #                         Locate files (change as needed).
 # --------------------------------------------------------------------------------
 set(SOURCES          # All .cpp files in src/
-    src/example.cpp
+        src/tree/bstree.cpp
+        src/tree/bstree.hpp
+        src/tree/splay_tree.cpp
+        src/tree/splay_tree.hpp
 )
 set(TESTFILES        # All .cpp files in tests/
     tests/main.cpp
 )
 set(LIBRARY_NAME engine)  # Default name for the library built from src/*.cpp (change if you wish)
-
 # --------------------------------------------------------------------------------
 #                            Build! (Change as needed)
 # --------------------------------------------------------------------------------
@@ -58,7 +60,10 @@ target_include_directories(${LIBRARY_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_link_libraries(${LIBRARY_NAME} PUBLIC doctest)
 
 # Set the compile options you want (change as needed).
-target_set_warnings(${LIBRARY_NAME} ENABLE ALL AS_ERROR ALL DISABLE Annoying)
+#target_set_warnings(${LIBRARY_NAME} ENABLE ALL AS_ERROR ALL DISABLE Annoying)
+target_set_warnings(${LIBRARY_NAME}
+        ENABLE ALL
+        DISABLE Annoying)
 # target_compile_options(${LIBRARY_NAME} ... )  # For setting manually.
 
 # Add an executable for the file app/main.cpp.
@@ -79,3 +84,25 @@ set_target_properties(
 
 # Set up tests (see tests/CMakeLists.txt).
 add_subdirectory(tests)
+
+# Set up clang-format
+find_program(
+        CLANG_FORMAT_EXE
+        NAMES "clang-format"
+        DOC "Path to clang-format executable"
+)
+if(NOT CLANG_FORMAT_EXE)
+    message(STATUS "clang-format not found.")
+else()
+    message(STATUS "clang-format found: ${CLANG_FORMAT_EXE}")
+    file(GLOB_RECURSE FILES_TO_FORMAT
+            "tests/*.cpp" "tests/*.hpp"
+            "src/*.cpp" "src/*.hpp"
+            "app/*.cpp" "app/*.hpp"
+            "include/*.cpp" "include/*.hpp")
+    add_custom_target(
+            clang-format
+            COMMAND ${CLANG_FORMAT_EXE} -i -style=file ${FILES_TO_FORMAT}
+    )
+    add_dependencies(${LIBRARY_NAME} clang-format)
+endif()
